@@ -15,6 +15,12 @@ Uma API simples em PHP para cadastro de contatos, interações, upload de arquiv
 
 ## 🚀 Como rodar o projeto localmente
 
+## Para iniciar o projeto use:
+
+```
+php -S localhost:8000 -t public
+```
+
 ### 1\. Clonar o projeto
 
 ```bash
@@ -45,17 +51,7 @@ return [
 
 ### 4\. Importar a base de dados
 
-Comando no terminal:
-
-```bash
-mysql -u root -p agenda < sql/general.sql
-```
-
-Ou use o phpMyAdmin para importar manualmente.
-
 > ⚠️ Certifique-se de que o banco `agenda` já existe antes.
-
-### 5\. (Opcional) Rodar as migrations via Composer
 
 Você pode rodar a migração com:
 
@@ -102,6 +98,7 @@ php -S localhost:8000 -t public
   "profile": file
 }
 ```
+
 ou
 
 ```json
@@ -109,6 +106,7 @@ ou
   "attachment": file
 }
 ```
+
 ---
 
 ## 🙌 Envio de e-mail
@@ -122,6 +120,7 @@ O endpoint `/send-email` recebe:
   "message": "Mensagem em texto simples"
 }
 ```
+
 ---
 
 ## ⏳ Tempo de desenvolvimento
@@ -134,7 +133,7 @@ O endpoint `/send-email` recebe:
 - Sem autenticação JWT ou login
 - Uploads locais (sem serviço em nuvem)
 - Não possui paginação
-- Apenas uma API REST, com interface básico em html
+- Apenas uma API REST, com interface básico usando Nextjs, não consegui fazer somente em HTML e CSS
 
 ---
 
@@ -147,11 +146,11 @@ contacts/
 │   │   ├── Controllers/
 │   │   ├── Models/
 │   │   └── Core/
+|   |   └── Services/
 │   ├── migrate.php
 │   └── config.php
 ├── public/
 │   ├── index.php
-│   └── router.php
 ├── sql/
 │   └── general.sql
 ├── composer.json
