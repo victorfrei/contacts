@@ -17,3 +17,4 @@ CREATE TABLE interactions (
     description TEXT,
     FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE CASCADE
 );
+

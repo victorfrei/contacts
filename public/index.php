@@ -2,8 +2,14 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Victorfreire\Contacts\Controllers\ContactController;
+use Victorfreire\Contacts\Controllers\InteractionController;
+use Victorfreire\Contacts\Controllers\SendEmailController;
+use Victorfreire\Contacts\Controllers\UploadController;
 
 $controller = new ContactController();
+$interactionController = new InteractionController();
+
+$uploadController = new UploadController();
 
 $uri = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
@@ -13,7 +19,7 @@ switch ("$method $uri") {
         $controller->index();
         break;
 
-    case (str_starts_with("$method $uri",'GET /contact/')):
+    case (str_starts_with("$method $uri", 'GET /contact/')):
         $controller->show((int) basename($uri));
         break;
 
@@ -22,13 +28,44 @@ switch ("$method $uri") {
         $controller->store($data);
         break;
 
-    case (str_starts_with("$method $uri",'PUT /contact/')):
+    case (str_starts_with("$method $uri", 'PUT /contact/')):
         $data = json_decode(file_get_contents('php://input'), true);
         $controller->update((int) basename($uri), $data);
         break;
 
-    case (str_starts_with("$method $uri",'DELETE /contact/')):
+    case (str_starts_with("$method $uri", 'DELETE /contact/')):
         $controller->delete((int) basename($uri));
+        break;
+
+    case 'GET /interactions':
+        $contactId = (int) basename($uri);
+        $interactionController->index($contactId);
+        break;
+
+    case "$method $uri" === 'POST /interactions':
+        $data = json_decode(file_get_contents('php://input'), true);
+        $interactionController->store($data);
+        break;
+
+    case str_starts_with("$method $uri", 'PUT /interactions/'):
+        $id = (int) basename($uri);
+        $data = json_decode(file_get_contents('php://input'), true);
+        $interactionController->update($id, $data);
+        break;
+
+    case str_starts_with("$method $uri", 'DELETE /interactions/'):
+        $id = (int) basename($uri);
+        $interactionController->delete($id);
+        break;
+
+    case 'POST /send-email':
+        $controller = new SendEmailController();
+        $data = json_decode(file_get_contents('php://input'), true);
+        $controller->send($data);
+        break;
+
+    case 'POST /upload':
+        $uploadController->handle();
         break;
 
     default:

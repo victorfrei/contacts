@@ -2,7 +2,8 @@
 namespace Victorfreire\Contacts\Models;
 
 use Victorfreire\Contacts\Core\AbstractContactModel;
-use PDO;
+use InvalidArgumentException;
+
 
 class Contact extends AbstractContactModel
 {
@@ -42,4 +43,17 @@ class Contact extends AbstractContactModel
             $id
         ]);
     }
+
+    public function updateFile(int $id, string $field, string $path): bool
+{
+    if (!in_array($field, ['profile_image', 'attachment'])) {
+        throw new InvalidArgumentException("Campo inválido: $field");
+    }
+
+    $stmt = $this->db->prepare("UPDATE contacts SET {$field} = :path WHERE id = :id");
+    return $stmt->execute([
+        'path' => $path,
+        'id' => $id
+    ]);
+}
 }
