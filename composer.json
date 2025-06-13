@@ -1,0 +1,17 @@
+{
+    "name": "victorfreire/contacts",
+    "description": "Contact App to a Development Test",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Victorfreire\\Contacts\\": "app/src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Victor Freire"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
