@@ -13,5 +13,9 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "scripts": {
+        "migrate":"php app/migrate.php",
+        "start":"php -S localhost:8000 -t public"
+    }
 }
