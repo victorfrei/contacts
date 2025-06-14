@@ -79,7 +79,10 @@ php -S localhost:8000 -t public
 | POST | /contact | Cria novo contato |
 | PUT | /contact/{id} | Atualiza um contato |
 | DELETE | /contact/{id} | Remove um contato |
+| GET | /interactions | Lista todas as interação |
 | POST | /interactions | Cria uma interação com contato |
+| PUT | /interactions/{id} | Atualiza uma interação com contato |
+| DELETE | /interactions/{id} | Apaga uma interação com contato |
 | POST | /upload | Envia imagem e/ou anexo |
 | POST | /send-email | Envia e-mail de teste |
 
@@ -133,7 +136,7 @@ O endpoint `/send-email` recebe:
 - Sem autenticação JWT ou login
 - Uploads locais (sem serviço em nuvem)
 - Não possui paginação
-- Apenas uma API REST, com interface básico usando Nextjs, não consegui fazer somente em HTML e CSS
+- Apenas uma API REST, com interface básico usando HTML E CSS (não finalizado), a minha solução seria criar em Nextjs (Tailwind + React)
 
 ---
 
